@@ -26,7 +26,7 @@ In this task, you will work with a bird flock simulation, where each bird’s po
 A demonstration of the bird flock movement is shown below:
 ![bird](bird_simulation.gif)
 
-Please update the provided simulation code ([`bird.py`](https://github.com/UB-CSE587/homework_2/blob/main/bird.py)) to utilize Spark for parallel processing of position updates for all birds. All necessary hyperparameters (thresholds, max/min values) are included in the script, along with a basic implementation using a for-loop to update bird positions. Revise this to add a Spark-based implementation to handle position updates more efficiently.
+Please update the provided simulation code ([`bird.py`](https://github.com/UB-CSE587/homework_2/blob/main/bird.py)) to utilize Spark for parallel processing of position updates for all birds. All necessary hyperparameters (thresholds, max/min values) are included in the script, along with a basic implementation using a for-loop to update bird positions. Revise this to add a Spark-based implementation to handle position updates more efficiently. You need to write and submit a separate python file: `bird_spark.py`.
 
 ---
 
@@ -53,13 +53,26 @@ And at the end of your code, it should print the time cost in this format:
 print(f"Time cost for spark and non-spark version: [{time_1:.3f},  {time_2:.3f}] seconds")
 ```
 
-- **Task 2**, you are required to run the simulation using both the Spark and non-Spark implementations with `[200, 1,000, 5,000, 10,000]` birds for `200` frames. Record the time cost per frame for both implementations and include these results in your report, along with a discussion of your observations.
+- **Task 2**, you are required to run the simulation using both the Spark and non-Spark implementations with `[200, 1,000, 5,000, 10,000]` birds for `500` frames. Record the time cost per frame for both implementations and include these results in your report, along with a discussion of your observations. You need to submit a python script `bird_spark.py` for your spark implementation, which will be tested directly by: `python bird_spark.py`. And your code is expected to generate a gif image similar to the demo showed above. The plot function is also provided in the `get_gif.py`.
+  
 
 Additional results with different configurations are encouraged to enhance your report. Present all results in your report, either as tables or plots for clarity, and write discussion on any trends observed.
 
+## 3. Submission Format:
+You are expected to submit a zip file, called `<UBIT_Name>.zip`, in UBLearn consists all your code, a gif image for task 1.3, and your report in pdf in your zip file. The zip file should be organized as following:
+```
+<UBIT_Name>
+--<UBIT_Name>.pdf
+--edit_dist.py
+--MLP.py
+--bird_spark.py
+--bird_simulation.gif
+...
+```
+
 ---
 
-## 3. Scoring
+## 4. Scoring
 
 The score will be assigned as follows:
 
