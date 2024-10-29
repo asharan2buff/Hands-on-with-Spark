@@ -28,4 +28,4 @@ In this task, you will work with a bird flock simulation, where each bird’s po
 A demonstration of the bird flock movement is shown below:
 ![bird](bird_simulation.gif)
 
-Please update the provided simulation code (`birds.py`) to utilize Spark for parallel processing of position updates for all birds. All necessary hyperparameters (thresholds, max/min values) are included in the script, along with a basic implementation using a `for` loop to update bird positions. Revise this to add a Spark-based implementation to handle position updates more efficiently.
+Please update the provided simulation code (`birds.py`) to utilize Spark for parallel processing of position updates for all birds. All necessary hyperparameters (thresholds, max/min values) are included in the script, along with a basic implementation using a for-loop to update bird positions. Revise this to add a Spark-based implementation to handle position updates more efficiently.
