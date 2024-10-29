@@ -30,21 +30,20 @@ Please update the provided simulation code ([`bird.py`](https://github.com/UB-CS
 
 ---
 
-## 2. Evaluation
-
+## 2. Code Evaluation
 The evaluation will be conducted on the same machine to ensure consistency across all implementations.
 
-- **Task 1.1**, you are required to report the time costs for each version (for-loop, multi-process, and Spark) for varying numbers of sentences: `[10, 50, 100, 250, 500, 1000]`. Include these results in your report. 
+- **Task 1.1**, 
 Submitted code will be tested by a command like:
 ```
 python edit_dist.py --csv_dir /path/to/csv --num_sentences n
 ```
-And at the end of your code, it should print the time cost in this format:
+And at the end of your code, it should print the time cost for each version (for-loop, multi-process, and Spark) in this format:
 ```
 print(f"Time cost (Spark, multi-process, for-loop): [{time_1:.3f}, {time_2:.3f}, {time_3:.3f}]")
 ```
 
-- **Task 1.2**, test and report the time costs with values for `n_input` set to `[1000, 5000, 10000, 50000, 100000]`, keeping `hidden_dim` and `hidden_layer` as default. Submitted code will be tested by a command like:
+- **Task 1.2**, Submitted code will be tested by a command like:
 ```
 python MLP.py --n_input n --hidden_dim d --hidden_layer l
 ```
@@ -53,12 +52,22 @@ And at the end of your code, it should print the time cost in this format:
 print(f"Time cost for spark and non-spark version: [{time_1:.3f},  {time_2:.3f}] seconds")
 ```
 
-- **Task 2**, you are required to run the simulation using both the Spark and non-Spark implementations with `[200, 1,000, 5,000, 10,000]` birds for `500` frames. Record the time cost per frame for both implementations and include these results in your report, along with a discussion of your observations. You need to submit a python script `bird_spark.py` for your spark implementation, which will be tested directly by: `python bird_spark.py`. And your code is expected to generate a gif image similar to the demo showed above. The plot function is also provided in the `get_gif.py`.
-  
+- **Task 1.3**, You need to submit a python script `bird_spark.py` for your spark implementation, which will be tested directly by: `python bird_spark.py`. And your code is expected to generate a gif image similar to the demo showed above. (The plot function is also provided in the `get_gif.py`.) In addition, your code should print time cost per frame at the end of your code in this format:
+```
+print(f'Average time cost per frame: {mean_time:.4f}')
+```
 
-Additional results with different configurations are encouraged to enhance your report. Present all results in your report, either as tables or plots for clarity, and write discussion on any trends observed.
+## 3. Report:
 
-## 3. Submission Format:
+- **Task 1.1**, In your report, you are required to report time cost of three implementation with different numbers of sentences: `[10, 50, 100, 250, 500, 1000]`.
+- **Task 1.2**, test and report the time costs with values for `n_input` set to `[1000, 5000, 10000, 50000, 100000]`, keeping `hidden_dim` and `hidden_layer` as default. 
+- **Task 1.3**, you are required to run the simulation using both the Spark and non-Spark implementations with `[200, 1,000, 5,000, 10,000]` birds for `500` frames. Record the time cost per frame for both implementations and include these results in your report, along with a discussion of your observations.
+
+Additional results with different configurations are encouraged to enhance your report. Present numerical results in your report, either as tables or plots for clarity, and write discussion on any trends observed.
+
+---
+
+## 4. Submission Format:
 You are expected to submit a zip file, called `<UBIT_Name>.zip`, in UBLearn consists all your code, a gif image for task 1.3, and your report in pdf in your zip file. The zip file should be organized as following:
 ```
 <UBIT_Name>
@@ -67,12 +76,11 @@ You are expected to submit a zip file, called `<UBIT_Name>.zip`, in UBLearn cons
 --MLP.py
 --bird_spark.py
 --bird_simulation.gif
-...
 ```
 
 ---
 
-## 4. Scoring
+## 5. Scoring
 
 The score will be assigned as follows:
 
