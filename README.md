@@ -26,7 +26,7 @@ In this task, you will work with a bird flock simulation, where each bird’s po
 A demonstration of the bird flock movement is shown below:
 ![bird](bird_simulation.gif)
 
-Please update the provided simulation code (`birds.py`) to utilize Spark for parallel processing of position updates for all birds. All necessary hyperparameters (thresholds, max/min values) are included in the script, along with a basic implementation using a for-loop to update bird positions. Revise this to add a Spark-based implementation to handle position updates more efficiently.
+Please update the provided simulation code ([`bird.py`](https://github.com/UB-CSE587/homework_2/blob/main/bird.py)) to utilize Spark for parallel processing of position updates for all birds. All necessary hyperparameters (thresholds, max/min values) are included in the script, along with a basic implementation using a for-loop to update bird positions. Revise this to add a Spark-based implementation to handle position updates more efficiently.
 
 ---
 
@@ -59,11 +59,12 @@ Additional results with different configurations are encouraged to enhance your 
 
 ---
 
-## 3. Score
-The score will be assigned as:
+## 3. Scoring
 
-- Task 1.1 successful code execution: 10,
-- Task 1.2 successful code execution: 10,
-- Task 1.3 successful code execution: 20,
-- Report writing quality: 60
+The score will be assigned as follows:
+
+- **Task 1.1**: Successful code execution – 10 points (must print reasonable time cost in required format).
+- **Task 1.2**: Successful code execution – 10 points (must print reasonable time cost in required format).
+- **Task 2**: Successful code execution – 20 points (must print reasonable time cost in required format and generate a meaningful GIF image).
+- **Report Quality**: 60 points (must include all numerical results, with clear descriptions and discussion).
 
