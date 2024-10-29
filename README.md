@@ -64,8 +64,9 @@ print(f'Average time cost per frame: {mean_time:.4f}')
 - **Task 1.3**, you are required to run the simulation using both the Spark and non-Spark implementations with `[200, 1,000, 5,000, 10,000]` birds for `500` frames. Record the time cost per frame for both implementations and include these results in your report, along with a discussion of your observations.
 
 - Present numerical results in your report, either as tables or plots for clarity, and write discussion on any trends observed.
-- Usage of any other online sources other than provided in this course will result in an automatic 0 in this assignment. 
-- Usage of any Artificial Intelligence tools to generate text will result in a -5 in the course
+- <span style="color:red">Usage of any other online sources other than provided in this course will result in an automatic 0 in this assignment. </span>
+- <span style="color:red">Usage of any Artificial Intelligence tools to generate text will result in a -5 in the course </span>
+
 
 ---
 
