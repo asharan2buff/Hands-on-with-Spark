@@ -24,9 +24,8 @@ In this task, you will work with a bird flock simulation, where each bird’s po
 3. **Cohesion**: Birds strive to stay with the flock. If a bird is too far from its nearest neighbor (beyond a threshold), it moves closer.
 4. **Velocity Constraints**: Flying speed is restricted to a certain range—too slow and the bird risks falling; too fast, and it exceeds physical limits.
 
-Revise the simulation code to utilize Spark for parallel processing, enhancing performance with distributed computations.
 
-
-
-Similar to above, A non-spark for-loop-based implementation is provided at bird.py. Please revise it to add a spark implementation. 
+A demonstration of the bird flock movement is shown below:
 ![bird](bird_simulation.gif)
+
+Please update the provided simulation code (`birds.py`) to utilize Spark for parallel processing of position updates for all birds. All necessary hyperparameters (thresholds, max/min values) are included in the script, along with a basic implementation using a `for` loop to update bird positions. Revise this to add a Spark-based implementation to handle position updates more efficiently.
