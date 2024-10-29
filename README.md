@@ -24,7 +24,7 @@ Record the execution time for each version when computing pairwise edit distance
 Inference code for an MLP classifier is available in [`MLP.py`](https://github.com/UB-CSE587/homework_2/blob/main/MLP.py). Update this code to include a Spark-based implementation for more efficient inference.
 
 ### 1.3 Flock Move Simulation using Spark
-In this task, you will work with a [bird flock](https://www.youtube.com/watch?v=V4f_1_r80RY) simulation, where each bird’s position is represented by a point in 3D space. Each bird follows movement rules based on flock dynamics:
+In this task, you will work with a [bird flock](https://en.wikipedia.org/wiki/Flock_(birds)) simulation, where each bird’s position is represented by a point in 3D space. Each bird follows movement rules based on flock dynamics:
 
 1. **Alignment**: Birds attempt to stay close to the leader bird, which follows a determined path with uniform velocity.
 2. **Separation**: Birds maintain distance from nearby neighbors. If a bird gets too close to a neighbor (within a threshold), it moves away.
