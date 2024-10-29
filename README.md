@@ -30,6 +30,7 @@ A demonstration of the bird flock movement is shown below:
 
 Please update the provided simulation code (`birds.py`) to utilize Spark for parallel processing of position updates for all birds. All necessary hyperparameters (thresholds, max/min values) are included in the script, along with a basic implementation using a for-loop to update bird positions. Revise this to add a Spark-based implementation to handle position updates more efficiently.
 
+---
 
 ## Evaluation
 
@@ -57,3 +58,5 @@ print(f"Time cost for spark and non-spark version: [{time_1:.3f},  {time_2:.3f}]
 - **Task 2**, you are required to run the simulation using both the Spark and non-Spark implementations with `[200, 1,000, 5,000, 10,000]` birds for `200` frames. Record the time cost per frame for both implementations and include these results in your report, along with a discussion of your observations.
 
 Additional results with different configurations are encouraged to enhance your report. Present all results in your report, either as tables or plots for clarity, and write discussion on any trends observed.
+
+
