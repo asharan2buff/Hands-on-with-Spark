@@ -35,7 +35,7 @@ Please update the provided simulation code (`birds.py`) to utilize Spark for par
 
 The evaluation will be conducted on the same machine to ensure consistency across all implementations.
 
-For **Task 1.1**, you are required to report the time costs for each version (for-loop, multi-process, and Spark) for varying numbers of sentences: `[10, 50, 100, 250, 500, 1000]`. Include these results in your report. 
+- **Task 1.1**, you are required to report the time costs for each version (for-loop, multi-process, and Spark) for varying numbers of sentences: `[10, 50, 100, 250, 500, 1000]`. Include these results in your report. 
 The code will be tested using a command like:
 ```
 python edit_dist.py --csv_dir /path/to/csv --num_sentences n
