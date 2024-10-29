@@ -35,10 +35,25 @@ Please update the provided simulation code (`birds.py`) to utilize Spark for par
 
 The evaluation will be conducted on the same machine to ensure consistency across all implementations.
 
-For **Task 1.1**, you are required to report the time costs for each version (for-loop, multi-process, and Spark) for varying numbers of sentences: `[10, 50, 100, 250, 500, 1000]`. Include these results in your report.
+For **Task 1.1**, you are required to report the time costs for each version (for-loop, multi-process, and Spark) for varying numbers of sentences: `[10, 50, 100, 250, 500, 1000]`. Include these results in your report. 
+The code will be tested using a command like:
+```
+python edit_dist.py --csv_dir /path/to/csv --num_sentences n
+```
+And at the end of your code, it should print the time cost in this format:
+```
+print(f"Time cost (Spark, multi-process, for-loop): [{time_1:.3f}, {time_2:.3f}, {time_3:.3f}]")
+```
 
-For **Task 1.2**, test and report the time costs with values for `n_input` set to `[1000, 5000, 10000, 50000, 100000]`, keeping `hidden_dim` and `hidden_layer` as default. Additional results with different configurations are encouraged to enhance your report.
+- **Task 1.2**, test and report the time costs with values for `n_input` set to `[1000, 5000, 10000, 50000, 100000]`, keeping `hidden_dim` and `hidden_layer` as default. Additional results with different configurations are encouraged to enhance your report.
+```
+python MLP.py --n_input n --hidden_dim d --hidden_layer l
+```
+And at the end of your code, it should print the time cost in this format:
+```
+print(f"Time cost for spark and non-spark version: [{time_1:.3f},  {time_2:.3f}] seconds")
+```
 
-For **Task 2**, you are required to run the simulation using both the Spark and non-Spark implementations with 200, 1,000, 5,000, and 10,000 birds for 500 frames. Record the time cost per frame for both implementations and include these results in your report, along with a discussion of your observations.
+- **Task 2**, you are required to run the simulation using both the Spark and non-Spark implementations with `[200, 1,000, 5,000, 10,000]` birds for `200` frames. Record the time cost per frame for both implementations and include these results in your report, along with a discussion of your observations.
 
 Present all time cost results in your report, either as tables or plots for clarity, and provide insights or discussion on any trends observed.
