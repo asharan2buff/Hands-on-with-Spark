@@ -80,7 +80,7 @@ def update_positions(positions):
 
 if __name__=="__main__":
     # Simulation parameters
-    num_birds = 200
+    num_birds = 1000
     num_frames = 500
 
     time_step = 1 / 4
