@@ -4,14 +4,14 @@ This assignment provides hands-on experience with writing and executing Spark in
 
 ## Task 1
 ### 1.1 Edit Distance
-A script for loading text data and computing the edit distance is provided in `edit_dist.py`, which includes a basic implementation using a `for` loop. Revise this code to include:
+A script for loading text data and computing the edit distance is provided in [`edit_dist.py`](https://github.com/UB-CSE587/homework_2/blob/main/edit_dist.py), which includes a basic implementation using a `for` loop. Revise this code to include:
 - A Spark version
 - A multi-process version
 
 Record the execution time for each version when computing pairwise edit distances for 1,000 sentences.
 
 ### 1.2 MLP Inference
-Inference code for an MLP classifier is available in `MLP.py`. Update this code to include a Spark-based implementation for more efficient inference.
+Inference code for an MLP classifier is available in [`MLP.py`](https://github.com/UB-CSE587/homework_2/blob/main/MLP.py). Update this code to include a Spark-based implementation for more efficient inference.
 
 ---
 
