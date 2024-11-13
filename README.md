@@ -1,4 +1,4 @@
-# HomeWork 2
+# HomeWork 3
 
 This assignment provides hands-on experience with writing and executing Spark in Python. You’ll start by installing PySpark, then implement functions to calculate edit distance between text strings and create efficient inference code for an MLP model. At last, you’ll modify a bird flock simulation code to utilize Spark for enhanced performance.
 
