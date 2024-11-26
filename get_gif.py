@@ -34,7 +34,7 @@ def create_mp4_from_images(folder_path, output_video="output.mp4", fps=10, resiz
         img = Image.open(img_path)
         
         # Resize each frame based on the resize_factor
-        img = img.resize((width, height), Image.ANTIALIAS)
+        img = img.resize((width, height), Image.Resampling.LANCZOS)
         
         # Convert PIL image to a format compatible with OpenCV
         frame = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
@@ -57,7 +57,7 @@ def create_compressed_gif(folder_path, gif_name="output.gif", duration=100, loop
         img = Image.open(img_path)
         
         # Resize each frame based on the resize_factor
-        img = img.resize((int(img.width * resize_factor), int(img.height * resize_factor)), Image.ANTIALIAS)
+        img = img.resize((int(img.width * resize_factor), int(img.height * resize_factor)), Image.Resampling.LANCZOS)
         
         # Optionally reduce colors (to 128 colors)
         img = img.convert("P", palette=Image.ADAPTIVE, colors=128) if optimize else img.convert("RGB")
@@ -85,9 +85,11 @@ def visualize_simulation(simulation, lead_bird_radius):
     # Customize appearance
     ax.grid(False)  # Remove grid for a cleaner look
     ax.set_facecolor("white")  # Set background color for better contrast
-    ax.w_xaxis.pane.fill = False
-    ax.w_yaxis.pane.fill = False
-    ax.w_zaxis.pane.fill = False
+
+    # Correctly disable axis panes
+    ax.xaxis.pane.fill = False
+    ax.yaxis.pane.fill = False
+    ax.zaxis.pane.fill = False
 
     # Customizing axis limits
     ax.set_xlim([-2.2 * lead_bird_radius, 2.2 * lead_bird_radius])
@@ -127,6 +129,7 @@ def visualize_simulation(simulation, lead_bird_radius):
         plt.draw()
         plt.tight_layout()
         plt.savefig(f'./plot/frame_{i:04d}.png', facecolor=fig.get_facecolor())
+
 
 
 if __name__ == "__main__":

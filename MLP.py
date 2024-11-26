@@ -8,6 +8,8 @@ import pandas as pd
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import pandas_udf
 from pyspark.sql.types import IntegerType
+import warnings
+warnings.filterwarnings("ignore")
 
 class MLPClassifier(nn.Module):
     def __init__(self, input_dim, num_classes, hidden_dims):
@@ -21,66 +23,62 @@ class MLPClassifier(nn.Module):
         self.model = nn.Sequential(*layers)
 
     def forward(self, x):
-        # Compute logits
         logits = self.model(x)
-        # Get predicted class using argmax
         predicted_classes = torch.argmax(logits, dim=1)
         return predicted_classes
-    
 
 # Define a pandas UDF for parallel classification
-@pandas_udf(IntegerType())
-def MLPClassifier_udf(*batch_inputs):
-    # The * symbol before batch_inputs is a way to collect any number of positional arguments into a single tuple.
+def create_mlp_udf(input_dim, num_classes, hidden_dims):
+    model = MLPClassifier(input_dim=input_dim, num_classes=num_classes, hidden_dims=hidden_dims)
+    model.eval()
 
-    raise NotImplementedError("This function is not implemented yet.")
+    @pandas_udf(IntegerType())
+    def MLPClassifier_udf(*batch_inputs):
+        # Convert inputs to a tensor
+        batch_tensor = torch.stack([torch.tensor(col, dtype=torch.float32) for col in batch_inputs], dim=1)
+        with torch.no_grad():
+            model_output = model(batch_tensor)
+        return pd.Series(model_output.numpy().tolist())
 
+    return MLPClassifier_udf
 
-if __name__=="__main__":
-    # Set up argument parsing
-    # Set up argument parsing
-    parser = argparse.ArgumentParser(description="Edit Distance with PySpark")
-    parser.add_argument('--n_input', type=int, default=10000, help="Number of sentences")
-    parser.add_argument('--hidden_dim', type=int, default=1024, help="hidden_dim")
-    parser.add_argument('--hidden_layer', type=int, default=50, help="hidden_layer")
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="MLP Classification with PySpark")
+    parser.add_argument('--n_input', type=int, default=10000, help="Number of inputs")
+    parser.add_argument('--hidden_dim', type=int, default=1024, help="Hidden dimension size")
+    parser.add_argument('--hidden_layer', type=int, default=50, help="Number of hidden layers")
     args = parser.parse_args()
 
-    # Configuration
     input_dim = 128  # Input dimension
     num_classes = 10  # Number of classes
-    hidden_dims = [args.hidden_dim * args.hidden_layer]  # Hidden layer sizes
+    hidden_dims = [args.hidden_dim] * args.hidden_layer  # Hidden layer sizes
+
     # Model and input setup
     mlp_model = MLPClassifier(input_dim, num_classes, hidden_dims)
-    x = torch.randn(args.n_input, input_dim)  # A random input vector of dimension n
 
-    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    # Spark version
+    # Non-spark version: Timing the forward pass
+    x = torch.randn(args.n_input, input_dim)
+    start_time_non_spark = time.time()
+    output_non_spark = mlp_model(x)
+    end_time_non_spark = time.time()
+    time_non_spark = end_time_non_spark - start_time_non_spark
 
-    # Initialize Spark session
+    # Spark version: Initialize Spark session and perform distributed classification
+    spark = SparkSession.builder.appName("MLPClassifier").getOrCreate()
 
-    # Convert Pandas DataFrame to Spark DataFrame
+    # Convert input data to Pandas DataFrame and then to Spark DataFrame
+    df_pandas = pd.DataFrame(x.numpy())
+    df_spark = spark.createDataFrame(df_pandas)
 
-    # Apply the UDF to perform distributed classification
-    start_time = time.time()
-    
-    
-    end_time = time.time()
+    # Create the UDF with the model's configuration
+    MLPClassifier_udf = create_mlp_udf(input_dim=input_dim, num_classes=num_classes, hidden_dims=hidden_dims)
 
-    print(f"Time taken for distributed classification: {end_time - start_time:.6f} seconds")
+    start_time_spark = time.time()
+    df_result = df_spark.withColumn("prediction", MLPClassifier_udf(*[df_spark[col] for col in df_spark.columns]))
+    #df_result.show()  # Optionally show some results
+    end_time_spark = time.time()
 
-    # Stop Spark session
+    time_spark = end_time_spark - start_time_spark
+    print(f"Time cost for spark and non-spark version: [{time_spark:.3f}, {time_non_spark:.3f}] seconds")
 
-
-    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    # Non-spark version
-
-    # Timing the forward pass
-    start_time = time.time()
-    output = mlp_model(x)
-    end_time = time.time()
-
-    # Output and timing results
-    print(f"Output: {output.shape}")
-    print(f"Time taken for forward pass: {end_time - start_time:.6f} seconds")
+    spark.stop()

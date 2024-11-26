@@ -80,7 +80,7 @@ def update_positions(positions):
 
 if __name__=="__main__":
     # Simulation parameters
-    num_birds = 1000
+    num_birds = 10000
     num_frames = 500
 
     time_step = 1 / 4
@@ -116,17 +116,17 @@ if __name__=="__main__":
 
         simulation.append(positions.copy())
 
-        print(f'frame simulation time: {frame_cost:.4f}s')
+        # print(f'frame simulation time: {frame_cost:.4f}s')
         
     mean_time = np.mean(time_cost)
     print(f'Average time cost per frame: {mean_time:.4f}')
 
     # # Visualization setup
-    fig = plt.figure(figsize=(10, 10))
-    ax = fig.add_subplot(111, projection='3d')
+    # fig = plt.figure(figsize=(10, 10))
+    # ax = fig.add_subplot(111, projection='3d')
 
-    # save all frame 
-    visualize_simulation(simulation, lead_bird_radius)
+    # # save all frame 
+    # visualize_simulation(simulation, lead_bird_radius)
 
-    # Usage example
-    create_compressed_gif("./plot", gif_name="bird_simulation.gif", duration=100, loop=1, resize_factor=0.5)
+    # # Usage example
+    # create_compressed_gif("./plot", gif_name="bird_simulation.gif", duration=100, loop=1, resize_factor=0.5)
