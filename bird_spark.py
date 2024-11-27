@@ -7,6 +7,7 @@ import time
 import pickle as pk
 from get_gif import *
 from pyspark import SparkContext, SparkConf
+import argparse
 
 # Function to compute the speed of a bird
 def compute_speed(velocity):
@@ -31,13 +32,11 @@ def limit_speed(velocity, min_speed, max_speed):
 
 # Update the lead bird's position following a figure-eight (infinity) trajectory
 def update_lead_bird_position(t):
-    
     angle = lead_bird_speed * t / lead_bird_radius  # Control the speed of the bird's movement
     # Parametric equations for the figure-eight (infinity sign)
     x = lead_bird_radius * np.cos(angle)
     y = lead_bird_radius * np.sin(angle) * np.cos(angle)
     z = lead_bird_radius * (1 + 0.5 * np.sin(angle / 5))
-    
     return np.array([x, y, z])
 
 # Cohesion and separation functions combined
@@ -94,13 +93,17 @@ def update_positions_spark(positions, velocities, sc):
     
     return np.array(updated_positions), np.array(updated_velocities)
 
-if __name__=="__main__":
+if __name__ == "__main__":
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(description="Bird Simulation with PySpark")
+    parser.add_argument('--num_birds', type=int, default=10000, help="Number of birds")
+    args = parser.parse_args()
+
+    num_birds = args.num_birds
+
     # Simulation parameters
-    num_birds = 10000
     num_frames = 500
-
     time_step = 1 / 4
-
     std_dev_position = 10.0
     lead_bird_speed = 20.0
     lead_bird_radius = 300.0
@@ -139,13 +142,3 @@ if __name__=="__main__":
 
     # Stop Spark context
     sc.stop()
-
-    # Visualization setup
-    # fig = plt.figure(figsize=(10, 10))
-    # ax = fig.add_subplot(111, projection='3d')
-
-    # # Save all frames
-    # visualize_simulation(simulation, lead_bird_radius)
-
-    # # Create GIF
-    # create_compressed_gif("./plot", gif_name="bird_simulation_spark.gif", duration=100, loop=1, resize_factor=0.5)
