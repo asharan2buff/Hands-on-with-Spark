@@ -1,16 +1,3 @@
-# HomeWork 3
-
-This assignment provides hands-on experience with writing and executing Spark in Python. You’ll start by installing PySpark, then implement functions to calculate edit distance between text strings and create efficient inference code for an MLP model. At last, you’ll modify a bird flock simulation code to utilize Spark for enhanced performance.
-
-General Homework Requirements:
-
-- Work Environment: This homework can be written in Pyspark/Python.
-- Programming: Your submission must be a executable python script.
-- Academic Integrity: You will get an automatic F for the course if you violate the academic integrity policy.
-- Teams: This homework is an individual assignment. You are not permitted to work with anyone else on this assignment. All work submitted must be yours and yours alone.
-
-
----
 
 ## 1. Task
 ### 1.1 Edit Distance
